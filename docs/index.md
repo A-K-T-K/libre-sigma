@@ -29,12 +29,14 @@ LibRE Sigma is designed to provide an open, modern alternative to commercial sta
 ## Quick Start (1-Step Launch)
 
 ```bash
-git clone https://github.com/A-K-T-K/libre-tab.git
-cd libre-tab
+git clone https://github.com/A-K-T-K/libre-sigma.git
+cd libre-sigma
 
 # Run universal launcher (Windows, macOS, Linux):
 python start.py
 ```
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22093338.svg)](https://doi.org/10.5281/zenodo.22093338)
 
 ---
 
