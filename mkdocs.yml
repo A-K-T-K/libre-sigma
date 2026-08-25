@@ -1,7 +1,8 @@
 site_name: LibRE Tab
 site_description: Open-Source Statistical Analysis & Reliability Engineering Desktop Platform
 site_author: LibRE Tab Contributors
-repo_url: https://github.com/your-username/libre-tab
+site_url: https://a-k-t-k.github.io/libre-tab/
+repo_url: https://github.com/A-K-T-K/libre-tab
 repo_name: libre-tab
 edit_uri: edit/main/docs/
 

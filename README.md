@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://your-username.github.io/libre-tab/"><img src="https://img.shields.io/badge/Docs-Live%20Guide-008450?style=for-the-badge&logo=material-for-mkdocs&logoColor=white" alt="Documentation"></a>
+  <a href="https://a-k-t-k.github.io/libre-tab/"><img src="https://img.shields.io/badge/Docs-Live%20Guide-008450?style=for-the-badge&logo=material-for-mkdocs&logoColor=white" alt="Documentation"></a>
   <a href="#getting-started"><img src="https://img.shields.io/badge/Status-v1.0.0-008450?style=for-the-badge" alt="Release Status"></a>
   <a href="#architecture-overview"><img src="https://img.shields.io/badge/Platform-Tauri%20%7C%20Rust%20%7C%20React-0078d4?style=for-the-badge" alt="Platform"></a>
   <a href="#architecture-overview"><img src="https://img.shields.io/badge/Engine-Python%20%7C%20SciPy%20%7C%20Statsmodels-3776AB?style=for-the-badge" alt="Engine"></a>
@@ -103,7 +103,7 @@ LibRE Tab utilizes a decoupled client-server architecture packaged as a desktop 
 Clone the repository and run the cross-platform launcher. It automatically verifies your environment, installs missing dependencies, and opens the application:
 
 ```bash
-git clone https://github.com/your-username/libre-tab.git
+git clone https://github.com/A-K-T-K/libre-tab.git
 cd libre-tab
 
 # Universal (Windows, macOS, Linux):

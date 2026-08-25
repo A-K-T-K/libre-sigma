@@ -8,7 +8,7 @@ Thank you for your interest in contributing to LibRE Tab. We welcome contributio
 
 ### 1. Fork & Clone
 ```bash
-git clone https://github.com/<your-username>/libre-tab.git
+git clone https://github.com/A-K-T-K/libre-tab.git
 cd libre-tab
 ```
 

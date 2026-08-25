@@ -41,7 +41,7 @@ Zero cloud transmission and zero telemetry. All computations, datasets, and visu
 ## Quick Start (1-Step Launch)
 
 ```bash
-git clone https://github.com/your-username/libre-tab.git
+git clone https://github.com/A-K-T-K/libre-tab.git
 cd libre-tab
 
 # Run universal launcher (Windows, macOS, Linux):
