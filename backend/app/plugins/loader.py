@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set
 from .base import AnalysisPlugin, PluginManifestItem
 
-logger = logging.getLogger("libretab.plugins")
+logger = logging.getLogger("libresigma.plugins")
 
 
 class PluginRegistry:

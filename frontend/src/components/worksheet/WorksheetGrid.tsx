@@ -775,7 +775,7 @@ export const WorksheetGrid: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-lg font-bold text-[#111827] tracking-tight">Worksheet: {sheet.name}</h1>
-              <p className="text-[11px] text-[#4b5563]">LibRE Tab Statistical Workspace Worksheet Report</p>
+              <p className="text-[11px] text-[#4b5563]">LibRE Sigma Statistical Workspace Worksheet Report</p>
             </div>
             <div className="text-right text-[11px] text-[#4b5563]">
               <p className="font-medium text-[#111827]">{new Date().toLocaleString()}</p>

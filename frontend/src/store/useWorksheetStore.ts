@@ -170,7 +170,7 @@ export const useWorksheetStore = create<WorksheetState>((set, get) => ({
       isDirty: false,
     });
     useSessionStore.getState().clearSession();
-    document.title = 'LibRE Tab - Untitled Project';
+    document.title = 'LibRE Sigma - Untitled Project';
   },
 
   _undoStack: [],

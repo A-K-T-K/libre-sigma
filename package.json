@@ -1,8 +1,8 @@
 {
-  "name": "libre-tab-workspace",
+  "name": "libre-sigma-workspace",
   "version": "1.0.0",
   "private": true,
-  "description": "LibRE Tab - Scientific Statistical Analysis & Reliability Engineering Native Desktop Platform",
+  "description": "LibRE Sigma - Scientific Statistical Analysis & Reliability Engineering Native Desktop Platform",
   "scripts": {
     "start": "python start.py",
     "dev": "npm --prefix frontend run dev",

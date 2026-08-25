@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "LibRE Tab",
+    "productName": "LibRE Sigma",
     "version": "1.0.0"
   },
   "tauri": {
@@ -17,6 +17,11 @@
         "all": true,
         "sidecar": true,
         "scope": [
+          {
+            "name": "binaries/libresigma-server",
+            "sidecar": true,
+            "args": true
+          },
           {
             "name": "binaries/libretab-server",
             "sidecar": true,
@@ -28,11 +33,12 @@
     "bundle": {
       "active": true,
       "category": "Education",
-      "copyright": "LibRE Tab Open Source",
+      "copyright": "LibRE Sigma Open Source",
       "deb": {
         "depends": []
       },
       "externalBin": [
+        "binaries/libresigma-server",
         "binaries/libretab-server"
       ],
       "icon": [
@@ -42,8 +48,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.libretab.app",
-      "longDescription": "LibRE Tab - Modular Scientific Statistical Analysis and Reliability Engineering Platform",
+      "identifier": "com.libresigma.app",
+      "longDescription": "LibRE Sigma - Modular Scientific Statistical Analysis and Reliability Engineering Platform",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -52,7 +58,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "LibRE Tab Statistical Analysis",
+      "shortDescription": "LibRE Sigma Statistical Analysis",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
@@ -75,7 +81,7 @@
         "minWidth": 900,
         "center": true,
         "resizable": true,
-        "title": "LibRE Tab - Untitled Project"
+        "title": "LibRE Sigma - Untitled Project"
       }
     ]
   }

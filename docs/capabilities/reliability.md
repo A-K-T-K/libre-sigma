@@ -1,6 +1,6 @@
 # Reliability Engineering & Life Data Analysis
 
-LibRE Tab provides statistical tools for analyzing failure time data, estimating component life expectancy, and modeling survival functions.
+LibRE Sigma provides statistical tools for analyzing failure time data, estimating component life expectancy, and modeling survival functions.
 
 ---
 

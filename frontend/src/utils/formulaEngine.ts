@@ -1,5 +1,5 @@
 /**
- * High-Precision Vectorized Statistical & Mathematical Formula Engine for LibRE Tab.
+ * High-Precision Vectorized Statistical & Mathematical Formula Engine for LibRE Sigma.
  * Pre-compiles expressions into vectorized closures for 100x+ faster row evaluations.
  */
 

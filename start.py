@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-LibRE Tab - Universal Cross-Platform Launcher
+LibRE Sigma - Universal Cross-Platform Launcher
 Works seamlessly across Windows, macOS, and Linux.
 
 Usage:
-    python start.py           # Auto-checks dependencies and starts LibRE Tab
+    python start.py           # Auto-checks dependencies and starts LibRE Sigma
     python start.py --web     # Force web mode (browser) instead of native Tauri
     python start.py --tauri   # Force native desktop window mode
 """
@@ -53,7 +53,7 @@ atexit.register(cleanup)
 
 
 def signal_handler(sig, frame):
-    print("\n[LibRE Tab] Shutting down gracefully...")
+    print("\n[LibRE Sigma] Shutting down gracefully...")
     cleanup()
     sys.exit(0)
 
@@ -64,15 +64,15 @@ if hasattr(signal, "SIGTERM"):
 
 
 def log(msg: str):
-    print(f"\033[92m[LibRE Tab]\033[0m {msg}")
+    print(f"\033[92m[LibRE Sigma]\033[0m {msg}")
 
 
 def log_warn(msg: str):
-    print(f"\033[93m[LibRE Tab Warning]\033[0m {msg}")
+    print(f"\033[93m[LibRE Sigma Warning]\033[0m {msg}")
 
 
 def log_err(msg: str):
-    print(f"\033[91m[LibRE Tab Error]\033[0m {msg}")
+    print(f"\033[91m[LibRE Sigma Error]\033[0m {msg}")
 
 
 def check_python_dependencies():
@@ -145,7 +145,7 @@ def wait_for_server(url: str, timeout: float = 30.0) -> bool:
 
 def run_tauri_mode():
     """Launches the native Tauri desktop application."""
-    log("Launching LibRE Tab Native Desktop Shell (Tauri)...")
+    log("Launching LibRE Sigma Native Desktop Shell (Tauri)...")
     node_cmd = sys.executable  # Placeholder, node will be used
     script = str(ROOT_DIR / "run_tauri.js")
     
@@ -187,13 +187,13 @@ def run_web_mode():
 
     log("Waiting for application to be ready...")
     if wait_for_server("http://localhost:5173", timeout=20.0):
-        log("LibRE Tab is ready! Opening in your default desktop browser...")
+        log("LibRE Sigma is ready! Opening in your default desktop browser...")
         webbrowser.open("http://localhost:5173")
     else:
         log("Frontend server started. Open http://localhost:5173 in your browser.")
 
     print("\n" + "=" * 60)
-    print("  LibRE Tab is running!")
+    print("  LibRE Sigma is running!")
     print("  - Web App: http://localhost:5173")
     print("  - Backend API: http://127.0.0.1:8000/docs")
     print("  Press Ctrl+C to stop all servers.")
@@ -206,10 +206,15 @@ def find_existing_desktop_binary() -> Path | None:
     """Searches for already-built native desktop executables."""
     ext = ".exe" if platform.system() == "Windows" else ""
     candidates = [
+        ROOT_DIR / "dist-portable" / "LibRESigma-v1.0.0-Portable" / f"LibRESigma{ext}",
         ROOT_DIR / "dist-portable" / "LibRETab-v1.0.0-Beta-Portable" / f"LibRETab{ext}",
+        ROOT_DIR / "dist-portable" / f"LibRESigma{ext}",
         ROOT_DIR / "dist-portable" / f"LibRETab{ext}",
+        FRONTEND_DIR / "src-tauri" / "target" / "release" / f"libre-sigma{ext}",
+        FRONTEND_DIR / "src-tauri" / "target" / "release" / f"LibRE Sigma{ext}",
         FRONTEND_DIR / "src-tauri" / "target" / "release" / f"libre-tab{ext}",
         FRONTEND_DIR / "src-tauri" / "target" / "release" / f"LibRE Tab{ext}",
+        FRONTEND_DIR / "src-tauri" / "target" / "debug" / f"libre-sigma{ext}",
         FRONTEND_DIR / "src-tauri" / "target" / "debug" / f"libre-tab{ext}",
     ]
     for cand in candidates:
@@ -228,14 +233,14 @@ def run_prebuilt_binary(binary_path: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="LibRE Tab Universal Launcher")
+    parser = argparse.ArgumentParser(description="LibRE Sigma Universal Launcher")
     parser.add_argument("--web", action="store_true", help="Force browser/web mode")
     parser.add_argument("--tauri", action="store_true", help="Force native desktop Tauri mode")
     parser.add_argument("--dev", action="store_true", help="Force live hot-reloading development mode")
     args = parser.parse_args()
 
     print("=" * 60)
-    print("   LibRE Tab - Scientific Statistical Analysis Platform")
+    print("   LibRE Sigma - Scientific Statistical Analysis Platform")
     print("   Platform:", platform.system(), platform.release(), f"({platform.machine()})")
     print("   Python:", sys.version.split()[0])
     print("=" * 60)

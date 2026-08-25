@@ -1,6 +1,6 @@
 # Statistical Process Control (SPC) & Quality Engineering
 
-LibRE Tab includes an industrial-grade quality control suite for process monitoring, stability analysis, and tolerance compliance.
+LibRE Sigma includes an industrial-grade quality control suite for process monitoring, stability analysis, and tolerance compliance.
 
 ---
 

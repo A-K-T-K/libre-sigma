@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Scientific Sidecar Build Script for LibRE Tab (Optimized Lightweight Packaging)
+Scientific Sidecar Build Script for LibRE Sigma (Optimized Lightweight Packaging)
 Compiles the Python FastAPI backend into a standalone onedir sidecar bundle
 with core statistical engines (NumPy, SciPy, Statsmodels, Scikit-Learn, Lifelines)
 while excluding heavy deep-learning frameworks (PyTorch, Transformers).
@@ -69,12 +69,12 @@ def build_sidecar():
     sep = ";" if os.name == "nt" else ":"
 
     print("=" * 70)
-    print(f"  BUILDING OPTIMIZED SCIENTIFIC PYTHON SIDECAR FOR: {target_triple}")
+    print(f"  BUILDING OPTIMIZED SCIENTIFIC PYTHON SIDECAR FOR LIBRE SIGMA: {target_triple}")
     print("=" * 70)
 
     # 1. Clean previous build artifacts
     dist_dir = root_dir / "dist"
-    sidecar_dist = dist_dir / "libretab-server"
+    sidecar_dist = dist_dir / "libresigma-server"
 
     if sidecar_dist.exists():
         shutil.rmtree(sidecar_dist, ignore_errors=True)
@@ -84,7 +84,7 @@ def build_sidecar():
         sys.executable,
         "-m",
         "PyInstaller",
-        "--name", "libretab-server",
+        "--name", "libresigma-server",
         "--onedir",
         "--noconfirm",
         "--clean",
@@ -129,8 +129,8 @@ def build_sidecar():
         shutil.rmtree(tauri_bin_dir, ignore_errors=True)
     tauri_bin_dir.mkdir(parents=True, exist_ok=True)
 
-    target_sidecar_exe = tauri_bin_dir / f"libretab-server-{target_triple}{ext}"
-    built_exe = sidecar_dist / f"libretab-server{ext}"
+    target_sidecar_exe = tauri_bin_dir / f"libresigma-server-{target_triple}{ext}"
+    built_exe = sidecar_dist / f"libresigma-server{ext}"
 
     if not built_exe.exists():
         raise FileNotFoundError(f"Expected compiled executable at {built_exe} was not found!")
@@ -145,7 +145,7 @@ def build_sidecar():
             if dest.exists():
                 shutil.rmtree(dest, ignore_errors=True)
             shutil.copytree(item, dest)
-        elif item.name != f"libretab-server{ext}":
+        elif item.name != f"libresigma-server{ext}":
             shutil.copy2(item, dest)
 
     print(f"\n[SUCCESS] Sidecar binary deployed to:\n  {target_sidecar_exe}")

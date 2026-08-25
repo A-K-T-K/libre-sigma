@@ -229,7 +229,7 @@ export const usePluginStore = create<PluginState>((set, get) => ({
         id: 'help',
         label: 'Help',
         children: [
-          { id: 'help-about', label: 'About LibRE Tab...' },
+          { id: 'help-about', label: 'About LibRE Sigma...' },
           { id: 'help-docs', label: 'Plugin Architecture Guide' },
         ],
 

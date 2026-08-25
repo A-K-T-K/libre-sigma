@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="LibRE Tab Logo - Statistical Analysis and Reliability Engineering Platform" width="128" height="128" />
+  <img src="assets/logo.svg" alt="LibRE Sigma Logo - Statistical Analysis and Reliability Engineering Platform" width="128" height="128" />
 </p>
 
-<h1 align="center">LibRE Tab</h1>
+<h1 align="center">LibRE Sigma</h1>
 
 <p align="center">
   <strong>Open-Source Statistical Analysis, Six Sigma & Reliability Engineering Desktop Platform</strong>
@@ -18,14 +18,14 @@
 </p>
 
 <p align="center">
-  LibRE Tab is an open-source, local-first statistical analysis desktop platform for quality engineers, data scientists, and researchers. Built with Rust (Tauri), React, and scientific Python (NumPy, SciPy, Statsmodels), LibRE Tab provides a modern alternative to commercial statistical suites like Minitab® and JMP® for <strong>Six Sigma</strong>, <strong>Statistical Process Control (SPC)</strong>, <strong>Design of Experiments (DOE)</strong>, and <strong>Weibull Reliability Engineering</strong>.
+  LibRE Sigma is an open-source, local-first statistical analysis desktop platform for quality engineers, data scientists, and researchers. Built with Rust (Tauri), React, and scientific Python (NumPy, SciPy, Statsmodels), LibRE Sigma provides a modern alternative to commercial statistical suites like Minitab® and JMP® for <strong>Six Sigma</strong>, <strong>Statistical Process Control (SPC)</strong>, <strong>Design of Experiments (DOE)</strong>, and <strong>Weibull Reliability Engineering</strong>.
 </p>
 
 ---
 
 ## Architecture Overview
 
-LibRE Tab utilizes a decoupled client-server architecture packaged as a desktop binary:
+LibRE Sigma utilizes a decoupled client-server architecture packaged as a desktop binary:
 
 - **Desktop Shell**: [Tauri](https://tauri.app/) (Rust) managing application windows, OS lifecycle, and local sidecar processes.
 - **Frontend Application**: React 18, TypeScript, Fluent UI, and [Glide Data Grid](https://github.com/glideapps/glide-data-grid) for high-performance multi-sheet tabular data editing.
@@ -35,7 +35,7 @@ LibRE Tab utilizes a decoupled client-server architecture packaged as a desktop 
 
 ```
 +-------------------------------------------------------------+
-|                     LibRE Tab Frontend                      |
+|                    LibRE Sigma Frontend                     |
 | (React, TypeScript, Glide Data Grid, Fluent UI, Plotly.js)  |
 +------------------------------+------------------------------+
                                | IPC / Local HTTP (Port 8000)
@@ -82,7 +82,7 @@ LibRE Tab utilizes a decoupled client-server architecture packaged as a desktop 
 - **Formulas & Transformations**: Dynamic column-level formula bar supporting mathematical operations, standard functions, standardization, and conditional recoding.
 - **Data Manipulation**: Patterned data generation, multi-key sorting, column stacking/unstacking, value/range recoding, and condition-based worksheet subsetting.
 - **File Formats**:
-  - Native LibRE Tab Project format (`.ltb`, JSON-based state serialization including multi-sheet data, column metadata, and session history).
+  - Native LibRE Sigma Project format (`.lsg` / `.ltb`, JSON-based state serialization including multi-sheet data, column metadata, and session history).
   - Microsoft Excel import and multi-sheet export (`.xlsx`, `.xls`).
   - Delimited text files (`.csv`, `.tsv`, `.txt`).
   - Formatted session transcripts (`.txt`) and PDF print reports.
@@ -167,7 +167,7 @@ npm run tauri:build
 ## Directory Structure
 
 ```
-libre-tab/
+libre-sigma/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py              # FastAPI server entry point and CORS setup

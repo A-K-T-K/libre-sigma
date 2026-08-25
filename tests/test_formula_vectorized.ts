@@ -1,5 +1,5 @@
 /**
- * Benchmark and edge case test for vectorized Formula Engine in LibRE Tab.
+ * Benchmark and edge case test for vectorized Formula Engine in LibRE Sigma.
  */
 import { evaluateWorksheetFormula } from './frontend/src/utils/formulaEngine.ts';
 

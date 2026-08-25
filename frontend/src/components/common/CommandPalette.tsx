@@ -111,10 +111,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       },
       {
         id: 'file-save',
-        title: 'Save Project (.ltb)',
+        title: 'Save Project (.lsg / .ltb)',
         category: 'File',
         shortcut: 'Ctrl+S',
-        description: 'Save worksheets, session reports, and charts into native LibRE Tab Project file',
+        description: 'Save worksheets, session reports, and charts into native LibRE Sigma Project file',
         icon: <SaveRegular className="text-[#008450]" />,
         action: () => {
           saveProjectLtb(false);
@@ -317,7 +317,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       },
       {
         id: 'help-about',
-        title: 'About LibRE Tab...',
+        title: 'About LibRE Sigma...',
         category: 'Help',
         description: 'Version info, engine architecture, and statistical capabilities',
         icon: <InfoRegular className="text-[#0f6cbd]" />,

@@ -1,6 +1,6 @@
 # Design of Experiments (DOE)
 
-LibRE Tab supports standard industrial experimental design methodologies for parameter design, screening, and surface optimization.
+LibRE Sigma supports standard industrial experimental design methodologies for parameter design, screening, and surface optimization.
 
 ---
 

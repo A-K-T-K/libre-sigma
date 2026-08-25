@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 console.log('='.repeat(60));
-console.log('LIBRE TAB (.ltb) PROJECT FORMAT & EDGE CASE TEST SUITE');
+console.log('LIBRE SIGMA (.lsg / .ltb) PROJECT FORMAT & EDGE CASE TEST SUITE');
 console.log('='.repeat(60));
 
 let passed = 0;

@@ -1,6 +1,6 @@
 # System Architecture
 
-LibRE Tab is designed as a hybrid desktop platform combining a native Rust shell, a React user interface, and an asynchronous Python scientific engine.
+LibRE Sigma is designed as a hybrid desktop platform combining a native Rust shell, a React user interface, and an asynchronous Python scientific engine.
 
 ```mermaid
 graph TD
@@ -42,7 +42,7 @@ The desktop binary is compiled using **Tauri v1** (Rust):
 - **Sidecar Lifecycle Manager**:
   - Automatically locates and launches the Python engine process on startup.
   - In development mode, executes `python backend_entry.py --port 0`.
-  - In production packaged mode, launches the compiled binary (`libretab-server.exe`).
+  - In production packaged mode, launches the compiled binary (`libresigma-server.exe` / `libretab-server.exe`).
 - **Clean Exit Termination**: Catches `WindowEvent::Destroyed` and sends an immediate termination signal (`child.kill()`) to the sidecar process to prevent background leaks.
 
 ---

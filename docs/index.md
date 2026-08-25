@@ -1,12 +1,12 @@
-# LibRE Tab Documentation
+# LibRE Sigma Documentation
 
 <p align="center">
-  <img src="assets/logo.svg" alt="LibRE Tab Logo" width="100" height="100" />
+  <img src="assets/logo.svg" alt="LibRE Sigma Logo" width="100" height="100" />
 </p>
 
-Welcome to the official documentation for **LibRE Tab**, an open-source, local-first desktop application for statistical analysis, reliability engineering, design of experiments (DOE), and statistical process control (SPC).
+Welcome to the official documentation for **LibRE Sigma**, an open-source, local-first desktop application for statistical analysis, reliability engineering, design of experiments (DOE), and statistical process control (SPC).
 
-LibRE Tab is designed to provide an open, modern alternative to commercial statistical software packages (such as Minitab® and JMP®), combining a spreadsheet interface with Python scientific computing libraries.
+LibRE Sigma is designed to provide an open, modern alternative to commercial statistical software packages (such as Minitab® and JMP®), combining a spreadsheet interface with Python scientific computing libraries.
 
 ---
 
@@ -43,7 +43,7 @@ python start.py
 - **[How to Use Guide](how-to-use.md)**: A complete walkthrough of worksheets, importing data, running statistical analyses, and generating reports.
 - **[System Architecture](architecture.md)**: Technical overview of the Tauri desktop shell, Glide Data Grid frontend, and FastAPI analytical sidecar.
 - **[Statistical Capabilities](capabilities/basic-statistics.md)**: Detailed algorithms, assumptions, and formulas across all statistical modules.
-- **[Plugin Development Guide](plugin-guide.md)**: Step-by-step tutorial on extending LibRE Tab with custom Python analysis plugins.
+- **[Plugin Development Guide](plugin-guide.md)**: Step-by-step tutorial on extending LibRE Sigma with custom Python analysis plugins.
 
 ---
 

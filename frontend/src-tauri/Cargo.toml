@@ -1,12 +1,12 @@
 [package]
-name = "libre-tab"
+name = "libre-sigma"
 version = "1.0.0"
-description = "LibRE Tab - Native Desktop Statistical & Reliability Engineering Application"
-authors = ["LibRE Tab Team"]
+description = "LibRE Sigma - Native Desktop Statistical & Reliability Engineering Application"
+authors = ["LibRE Sigma Team"]
 
 license = ""
 repository = ""
-default-run = "libre-tab"
+default-run = "libre-sigma"
 
 edition = "2021"
 rust-version = "1.60"

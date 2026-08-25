@@ -42,7 +42,7 @@ def get_ephemeral_port(host: str = "127.0.0.1") -> int:
 def main():
     multiprocessing.freeze_support()
 
-    parser = argparse.ArgumentParser(description="LibRE Tab Statistical Engine")
+    parser = argparse.ArgumentParser(description="LibRE Sigma Statistical Engine")
     parser.add_argument("--host", default="127.0.0.1", help="Host IP to bind (default: 127.0.0.1)")
     parser.add_argument("--port", type=int, default=0, help="Port to bind (0 for ephemeral OS assignment)")
     parser.add_argument("--no-watchdog", action="store_true", help="Disable the heartbeat watchdog monitor")

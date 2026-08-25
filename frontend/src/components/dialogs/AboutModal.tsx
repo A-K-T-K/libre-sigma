@@ -29,9 +29,9 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3.5 bg-[#f8f9fa] border-b border-[#e0e0e0]">
           <div className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="LibRE Tab" className="w-5 h-5 rounded shadow-xs" />
+            <img src="/logo.svg" alt="LibRE Sigma" className="w-5 h-5 rounded shadow-xs" />
             <h2 className="text-sm font-bold text-[#201f1e]">
-              About LibRE Tab
+              About LibRE Sigma
             </h2>
           </div>
           <Button
@@ -48,7 +48,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
           <div className="bg-[#ebf3fc] border border-[#c7e0f4] rounded-lg p-3.5 text-[#008450]">
             <div className="font-bold text-sm text-[#008450] mb-1 flex items-center gap-1.5">
               <SparkleRegular className="w-4 h-4" />
-              <span>LibRE Tab v1.0.0</span>
+              <span>LibRE Sigma v1.0.0</span>
             </div>
             <p className="text-[11.5px] text-[#0c3b5e]">
               Modular, high-density scientific statistical analysis & reliability engineering platform.

@@ -1,5 +1,5 @@
 """
-Excel (.xlsx / .xls) Service for LibRE Tab.
+Excel (.xlsx / .xls) Service for LibRE Sigma.
 Handles multi-sheet Excel workbook importing and exporting.
 """
 
@@ -30,7 +30,7 @@ class WorksheetData(BaseModel):
 
 
 class ProjectPayload(BaseModel):
-    title: Optional[str] = "LibRE Tab Data"
+    title: Optional[str] = "LibRE Sigma Data"
     worksheets: List[WorksheetData]
 
 
@@ -128,7 +128,7 @@ async def export_xlsx(payload: ProjectPayload):
                 safe_name = ws.name[:31]
                 df.to_excel(writer, sheet_name=safe_name, index=False)
 
-        filename = f"{payload.title or 'LibRE_Tab_Data'}.xlsx".replace(" ", "_")
+        filename = f"{payload.title or 'LibRE_Sigma_Data'}.xlsx".replace(" ", "_")
         return Response(
             content=output.getvalue(),
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

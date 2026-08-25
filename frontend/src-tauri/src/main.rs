@@ -68,6 +68,10 @@ fn find_backend_executable() -> Option<PathBuf> {
   // 1. Current executable directory
   if let Ok(current_exe) = env::current_exe() {
     if let Some(exe_dir) = current_exe.parent() {
+      candidate_paths.push(exe_dir.join("libresigma-server-x86_64-pc-windows-msvc.exe"));
+      candidate_paths.push(exe_dir.join("libresigma-server.exe"));
+      candidate_paths.push(exe_dir.join("binaries").join("libresigma-server-x86_64-pc-windows-msvc.exe"));
+      candidate_paths.push(exe_dir.join("binaries").join("libresigma-server.exe"));
       candidate_paths.push(exe_dir.join("libretab-server-x86_64-pc-windows-msvc.exe"));
       candidate_paths.push(exe_dir.join("libretab-server.exe"));
       candidate_paths.push(exe_dir.join("binaries").join("libretab-server-x86_64-pc-windows-msvc.exe"));
@@ -77,6 +81,9 @@ fn find_backend_executable() -> Option<PathBuf> {
 
   // 2. Current working directory
   if let Ok(cwd) = env::current_dir() {
+    candidate_paths.push(cwd.join("binaries").join("libresigma-server-x86_64-pc-windows-msvc.exe"));
+    candidate_paths.push(cwd.join("binaries").join("libresigma-server.exe"));
+    candidate_paths.push(cwd.join("dist").join("libresigma-server").join("libresigma-server.exe"));
     candidate_paths.push(cwd.join("binaries").join("libretab-server-x86_64-pc-windows-msvc.exe"));
     candidate_paths.push(cwd.join("binaries").join("libretab-server.exe"));
     candidate_paths.push(cwd.join("dist").join("libretab-server").join("libretab-server.exe"));

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Automated Portable Release Packager for LibRE Tab Beta v1.0.0 (Lightweight Edition)
+Automated Portable Release Packager for LibRE Sigma Beta v1.0.0 (Lightweight Edition)
 Creates a clean, standalone, uninstaller-free portable desktop package with:
 - Native Tauri desktop launcher
 - Bundled WebView2 runtime loader
@@ -30,14 +30,14 @@ def build_portable():
     target_triple = get_target_triple()
     ext = ".exe" if os.name == "nt" else ""
     version = "v1.0.0-Beta"
-    package_name = f"LibRETab-{version}-Portable"
+    package_name = f"LibRESigma-{version}-Portable"
 
     dist_portable_dir = root_dir / "dist-portable"
     release_dir = dist_portable_dir / package_name
     zip_path = dist_portable_dir / f"{package_name}.zip"
 
     print("=" * 75)
-    print(f"  LIBRE TAB LIGHTWEIGHT PORTABLE DESKTOP PACKAGER ({version})")
+    print(f"  LIBRE SIGMA LIGHTWEIGHT PORTABLE DESKTOP PACKAGER ({version})")
     print(f"  Target Platform: {target_triple}")
     print("=" * 75)
 
@@ -69,6 +69,9 @@ def build_portable():
 
     tauri_target_dir = frontend_dir / "src-tauri" / "target" / "release"
     tauri_exe_candidates = [
+        tauri_target_dir / f"LibRE Sigma{ext}",
+        tauri_target_dir / f"libre-sigma{ext}",
+        tauri_target_dir / f"LibRESigma{ext}",
         tauri_target_dir / f"LibRE Tab{ext}",
         tauri_target_dir / f"libre-tab{ext}",
         tauri_target_dir / f"LibRETab{ext}",
@@ -83,8 +86,8 @@ def build_portable():
     if not built_tauri_exe:
         raise FileNotFoundError(f"Could not locate compiled Tauri executable in {tauri_target_dir}")
 
-    # Copy main launcher as LibRETab.exe
-    target_launcher = release_dir / f"LibRETab{ext}"
+    # Copy main launcher as LibRESigma.exe
+    target_launcher = release_dir / f"LibRESigma{ext}"
     shutil.copy2(built_tauri_exe, target_launcher)
     print(f"  [+] Copied Main Launcher: {target_launcher.name}")
 
@@ -103,8 +106,8 @@ def build_portable():
                 shutil.copytree(item, dest, dirs_exist_ok=True)
             else:
                 shutil.copy2(item, dest)
-                if item.name.startswith("libretab-server-"):
-                    shutil.copy2(item, release_dir / f"libretab-server{ext}")
+                if item.name.startswith("libresigma-server-") or item.name.startswith("libretab-server-"):
+                    shutil.copy2(item, release_dir / f"libresigma-server{ext}")
         print("  [+] Copied Sidecar Binaries and Python Scientific Runtime")
 
     # 6. Purge test folders and caches from the final portable release
@@ -112,12 +115,12 @@ def build_portable():
 
     # 7. Generate Portable Instructions Readme
     readme_content = f"""================================================================================
-  LibRE Tab - Portable Desktop Release ({version})
+  LibRE Sigma - Portable Desktop Release ({version})
   Open-Source Statistical Analysis & Reliability Engineering Platform
 ================================================================================
 
 QUICK START INSTRUCTIONS:
-1. Double-click 'LibRETab.exe'.
+1. Double-click 'LibRESigma.exe'.
 2. The application starts immediately in offline, privacy-first mode.
 
 FEATURES IN THIS PORTABLE RELEASE:

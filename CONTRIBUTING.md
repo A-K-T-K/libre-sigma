@@ -1,6 +1,6 @@
-# Contributing to LibRE Tab
+# Contributing to LibRE Sigma
 
-Thank you for your interest in contributing to LibRE Tab. We welcome contributions for new statistical algorithms, user interface enhancements, bug fixes, and documentation improvements.
+Thank you for your interest in contributing to LibRE Sigma. We welcome contributions for new statistical algorithms, user interface enhancements, bug fixes, and documentation improvements.
 
 ---
 
@@ -68,4 +68,4 @@ npm run build
 
 ## License
 
-By contributing to LibRE Tab, you agree that your contributions will be licensed under the project's [MIT License](LICENSE).
+By contributing to LibRE Sigma, you agree that your contributions will be licensed under the project's [MIT License](LICENSE).

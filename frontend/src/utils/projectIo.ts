@@ -1,7 +1,7 @@
 /**
- * LibRE Tab Project & Data I/O Engine (.ltb, .xlsx, .csv)
+ * LibRE Sigma Project & Data I/O Engine (.lsg, .ltb, .xlsx, .csv)
  * --------------------------------------------------------
- * - Native LibRE Tab Project format (.ltb): complete state persistence
+ * - Native LibRE Sigma Project format (.lsg / .ltb): complete state persistence
  *   including multi-sheets, column formulas, analytical roles, locked columns,
  *   DOE design metadata, and interactive session output history (Plotly figures, tables, text).
  * - Excel (.xlsx/.xls) multi-sheet import & export.
@@ -14,7 +14,7 @@ import { useWorksheetStore } from '../store/useWorksheetStore';
 import { useSessionStore } from '../store/useSessionStore';
 
 export interface LtbProjectFile {
-  format: 'libretab-project';
+  format: 'libresigma-project' | 'libretab-project' | string;
   version: '1.0.0';
   title: string;
   savedAt: string;
@@ -26,12 +26,12 @@ export interface LtbProjectFile {
 // ─── Native File Dialog ───────────────────────────────────────────────
 
 /**
- * Opens a native file dialog for selecting LibRE Tab (.ltb), Excel (.xlsx, .xls), or CSV/TXT files.
+ * Opens a native file dialog for selecting LibRE Sigma (.lsg, .ltb), Excel (.xlsx, .xls), or CSV/TXT files.
  */
 export const openProjectFileDialog = () => {
   const input = document.createElement('input');
   input.type = 'file';
-  input.accept = '.ltb,.libretab,.xlsx,.xls,.csv,.txt';
+  input.accept = '.lsg,.libresigma,.ltb,.libretab,.xlsx,.xls,.csv,.txt';
   input.style.display = 'none';
 
   const cleanup = () => {
@@ -68,13 +68,15 @@ export const openProjectFileDialog = () => {
 
 /**
  * General import handler — routes the file to the right parser based on extension.
- * Supports .ltb, .libretab, .xlsx, .xls, .csv, .txt.
+ * Supports .lsg, .libresigma, .ltb, .libretab, .xlsx, .xls, .csv, .txt.
  */
 export const handleImportProjectFile = async (file: File): Promise<boolean> => {
   const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
 
   try {
     switch (ext) {
+      case 'lsg':
+      case 'libresigma':
       case 'ltb':
       case 'libretab':
         return await importLtbProjectFile(file);
@@ -85,17 +87,17 @@ export const handleImportProjectFile = async (file: File): Promise<boolean> => {
       case 'txt':
         return await importCsvFile(file);
       default:
-        // Try parsing as JSON LTB first, fallback to text
+        // Try parsing as JSON first, fallback to text
         try {
           const text = await file.text();
           const parsed = JSON.parse(text);
-          if (parsed.format === 'libretab-project' || parsed.worksheets) {
+          if (parsed.format === 'libresigma-project' || parsed.format === 'libretab-project' || parsed.worksheets) {
             return await loadLtbData(parsed, file.name);
           }
         } catch {
           // not JSON
         }
-        throw new Error(`Unsupported file format ".${ext}". Please select a .ltb, .xlsx, .xls, or .csv file.`);
+        throw new Error(`Unsupported file format ".${ext}". Please select a .lsg, .ltb, .xlsx, .xls, or .csv file.`);
     }
   } catch (err: any) {
     console.error('[ProjectIO] Import failed:', err);
@@ -104,18 +106,18 @@ export const handleImportProjectFile = async (file: File): Promise<boolean> => {
   }
 };
 
-// ─── LTB Project Serialization & Ingestion ────────────────────────────
+// ─── Project Serialization & Ingestion ────────────────────────────────
 
 /**
  * Saves the entire project (all worksheets, formulas, roles, DOE meta, and session reports)
- * to a native LibRE Tab (.ltb) JSON file.
+ * to a native LibRE Sigma (.lsg / .ltb) JSON file.
  */
 export const saveProjectLtb = async (saveAs: boolean = false): Promise<boolean> => {
   const wsState = useWorksheetStore.getState();
   const sessionState = useSessionStore.getState();
 
   const activeSheet = wsState.getActiveWorksheet();
-  const defaultName = activeSheet?.name ? `${activeSheet.name}` : 'LibRE_Tab_Project';
+  const defaultName = activeSheet?.name ? `${activeSheet.name}` : 'LibRE_Sigma_Project';
 
   let projectTitle = defaultName;
   if (saveAs) {
@@ -126,7 +128,7 @@ export const saveProjectLtb = async (saveAs: boolean = false): Promise<boolean> 
 
   try {
     const ltbPayload: LtbProjectFile = {
-      format: 'libretab-project',
+      format: 'libresigma-project',
       version: '1.0.0',
       title: projectTitle,
       savedAt: new Date().toISOString(),
@@ -287,7 +289,7 @@ async function loadLtbData(data: any, fileName: string): Promise<boolean> {
   });
 
   const projectName = data.title || fileName.replace(/\.[^/.]+$/, '');
-  document.title = `LibRE Tab - ${projectName}`;
+  document.title = `LibRE Sigma - ${projectName}`;
   return true;
 }
 
@@ -532,7 +534,7 @@ export const printSessionReport = () => {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LibRE Tab Worksheet - ${sheetTitle} (${new Date().toLocaleDateString()})</title>
+  <title>LibRE Sigma Worksheet - ${sheetTitle} (${new Date().toLocaleDateString()})</title>
   <style>
     @page { size: letter portrait; margin: 15mm 12mm 15mm 12mm; }
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-sizing: border-box; }
@@ -555,7 +557,7 @@ export const printSessionReport = () => {
   <div class="banner">
     <div class="banner-left">
       <h1>Worksheet: ${sheetTitle}</h1>
-      <p>LibRE Tab Statistical Workspace &mdash; Worksheet Report</p>
+      <p>LibRE Sigma Statistical Workspace &mdash; Worksheet Report</p>
     </div>
     <div class="banner-right">
       <p class="date">${now}</p>

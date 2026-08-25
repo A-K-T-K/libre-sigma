@@ -1,5 +1,5 @@
 """
-Master Test Suite Runner for LibRE Tab
+Master Test Suite Runner for LibRE Sigma
 Executes all 12 test suites covering all 122 statistical plugins and backend modules.
 """
 
@@ -25,7 +25,7 @@ TEST_SUITES = [
 
 def main():
     print("=" * 80)
-    print("  LibRE Tab - Master Statistical Plugin Test Suite Execution")
+    print("  LibRE Sigma - Master Statistical Plugin Test Suite Execution")
     print("=" * 80)
     print(f"Total Test Suites: {len(TEST_SUITES)}\n")
 

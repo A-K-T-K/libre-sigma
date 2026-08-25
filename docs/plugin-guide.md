@@ -1,6 +1,6 @@
 # Plugin Developer Guide
 
-LibRE Tab features a schema-driven plugin architecture. Adding a new statistical test or quality tool requires only creating a Python module in `backend/app/plugins/modules/`.
+LibRE Sigma features a schema-driven plugin architecture. Adding a new statistical test or quality tool requires only creating a Python module in `backend/app/plugins/modules/`.
 
 The application handles dynamic parameter schema generation, interactive modal dialog rendering, column selection pickers, top-menu mounting, session transcript formatting, and Plotly chart generation automatically.
 

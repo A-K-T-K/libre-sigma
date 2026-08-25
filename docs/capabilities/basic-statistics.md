@@ -1,6 +1,6 @@
 # Basic Statistics & Inferential Methods
 
-LibRE Tab provides a complete suite of classical parametric and non-parametric statistical hypothesis tests, estimation procedures, and descriptive summaries.
+LibRE Sigma provides a complete suite of classical parametric and non-parametric statistical hypothesis tests, estimation procedures, and descriptive summaries.
 
 ---
 

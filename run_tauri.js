@@ -31,8 +31,8 @@ const tauriArgs = args.length > 0 ? args : ['dev'];
 const frontendDir = path.join(__dirname, 'frontend');
 const tauriCliScript = path.join(frontendDir, 'node_modules', '@tauri-apps', 'cli', 'tauri.js');
 
-console.log(`[LibRE Tab] Cargo Bin: ${cargoBin}`);
-console.log(`[LibRE Tab] Executing Tauri CLI: node ${tauriCliScript} ${tauriArgs.join(' ')}`);
+console.log(`[LibRE Sigma] Cargo Bin: ${cargoBin}`);
+console.log(`[LibRE Sigma] Executing Tauri CLI: node ${tauriCliScript} ${tauriArgs.join(' ')}`);
 
 const child = spawn(process.execPath, [tauriCliScript, ...tauriArgs], {
   cwd: frontendDir,
@@ -42,7 +42,7 @@ const child = spawn(process.execPath, [tauriCliScript, ...tauriArgs], {
 });
 
 child.on('error', (err) => {
-  console.error('[LibRE Tab] Failed to start Tauri process:', err);
+  console.error('[LibRE Sigma] Failed to start Tauri process:', err);
   process.exit(1);
 });
 

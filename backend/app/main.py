@@ -18,7 +18,7 @@ from app.plugins.base import AnalysisResult, PluginManifestItem
 from app.plugins.loader import discover_and_load_plugins, registry
 from app.sample_data import SAMPLE_DATASETS
 
-logger = logging.getLogger("libretab")
+logger = logging.getLogger("libresigma")
 logging.basicConfig(level=logging.INFO)
 
 # Global watchdog state for orphan process cleanup
@@ -96,7 +96,7 @@ class FastORJSONResponse(ORJSONResponse):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Initializing LibRE Tab backend engine...")
+    logger.info("Initializing LibRE Sigma backend engine...")
     discover_and_load_plugins("app.plugins.modules")
     logger.info(f"Loaded {len(registry.all())} statistical plugins.")
     
@@ -111,8 +111,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="LibRE Tab API",
-    description="Schema-Driven Statistical & Reliability Computing Engine for LibRE Tab",
+    title="LibRE Sigma API",
+    description="Schema-Driven Statistical & Reliability Computing Engine for LibRE Sigma",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -160,7 +160,7 @@ async def health_check():
     update_heartbeat()
     return {
         "status": "online",
-        "app": "LibRE Tab Engine",
+        "app": "LibRE Sigma Engine",
         "version": "1.0.0",
         "registered_plugins": len(registry.all()),
     }

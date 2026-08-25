@@ -35,10 +35,10 @@ export const App: React.FC = () => {
   const { getActiveWorksheet, isDirty } = useWorksheetStore();
   const activeSheet = getActiveWorksheet();
 
-  // Dynamic window title: LibRE Tab - [Project Title] (* if unsaved)
+  // Dynamic window title: LibRE Sigma - [Project Title] (* if unsaved)
   useEffect(() => {
     const projectName = activeSheet?.name || 'Untitled Project';
-    document.title = `LibRE Tab - ${projectName}${isDirty ? ' *' : ''}`;
+    document.title = `LibRE Sigma - ${projectName}${isDirty ? ' *' : ''}`;
   }, [activeSheet?.name, isDirty]);
 
   // Global Undo/Redo/File keyboard shortcuts (Ctrl+Z, Ctrl+Y, Ctrl+N, Ctrl+S, Ctrl+O, Ctrl+I, Ctrl+E)
@@ -84,8 +84,8 @@ export const App: React.FC = () => {
                 useWorksheetStore.getState().setIsDirty(false);
                 await appWindow.close();
               },
-              'closing LibRE Tab',
-              'Exit LibRE Tab'
+              'closing LibRE Sigma',
+              'Exit LibRE Sigma'
             );
           }
         });

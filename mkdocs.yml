@@ -1,6 +1,6 @@
-site_name: LibRE Tab
+site_name: LibRE Sigma
 site_description: Open-Source Statistical Analysis & Reliability Engineering Desktop Platform
-site_author: LibRE Tab Contributors
+site_author: LibRE Sigma Contributors
 site_url: https://a-k-t-k.github.io/libre-tab/
 repo_url: https://github.com/A-K-T-K/libre-tab
 repo_name: libre-tab
@@ -12,7 +12,7 @@ theme:
   favicon: assets/logo.svg
   language: en
   palette:
-    # Light Mode: LibRE Tab Emerald Green
+    # Light Mode: LibRE Sigma Emerald Green
     - scheme: default
       primary: teal
       accent: green
