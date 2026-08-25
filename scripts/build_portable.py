@@ -23,13 +23,13 @@ def run_command(cmd, cwd=None, env=None):
     subprocess.run(cmd, cwd=cwd, env=env or os.environ, check=True, shell=isinstance(cmd, str))
 
 
-def build_portable():
+def build_portable(force_rebuild_sidecar: bool = True):
     root_dir = Path(__file__).resolve().parent.parent
     os.chdir(root_dir)
 
     target_triple = get_target_triple()
     ext = ".exe" if os.name == "nt" else ""
-    version = "v1.0.0-Beta"
+    version = "v1.0.0"
     package_name = f"LibRESigma-{version}-Portable"
 
     dist_portable_dir = root_dir / "dist-portable"
@@ -47,8 +47,8 @@ def build_portable():
     release_dir.mkdir(parents=True, exist_ok=True)
 
     # 2. Build Python Scientific Sidecar
-    print("\n>>> STEP 1: Building Optimized Python Scientific Sidecar...")
-    build_sidecar()
+    print("\n>>> STEP 1: Deploying Optimized Python Scientific Sidecar...")
+    build_sidecar(force_rebuild=force_rebuild_sidecar)
 
     # 3. Build React Frontend
     print("\n>>> STEP 2: Building Production React Frontend...")
@@ -166,4 +166,5 @@ SYSTEM REQUIREMENTS:
 
 
 if __name__ == "__main__":
-    build_portable()
+    reuse = "--reuse" in sys.argv or "--reuse-sidecar" in sys.argv
+    build_portable(force_rebuild_sidecar=not reuse)

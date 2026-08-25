@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "npm run build",
+    "beforeBuildCommand": "",
     "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:5173",
     "distDir": "../dist"
@@ -21,11 +21,6 @@
             "name": "binaries/libresigma-server",
             "sidecar": true,
             "args": true
-          },
-          {
-            "name": "binaries/libretab-server",
-            "sidecar": true,
-            "args": true
           }
         ]
       }
@@ -38,8 +33,7 @@
         "depends": []
       },
       "externalBin": [
-        "binaries/libresigma-server",
-        "binaries/libretab-server"
+        "binaries/libresigma-server"
       ],
       "icon": [
         "icons/32x32.png",

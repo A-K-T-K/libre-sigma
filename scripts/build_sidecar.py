@@ -26,7 +26,7 @@ def get_target_triple() -> str:
 
 
 def clean_unnecessary_files(directory: Path):
-    """Purges test fixtures inside 3rd party packages, debug symbols, and cache files."""
+    """Purges test fixtures inside 3rd party packages and debug symbols."""
     print("  [+] Purging internal test fixtures and debug symbols...")
     count_removed = 0
     size_removed = 0
@@ -39,7 +39,7 @@ def clean_unnecessary_files(directory: Path):
         if "app" in item.parts or "plugins" in item.parts:
             continue
         # Remove third-party test suites
-        if item.is_dir() and item.name in ("tests", "test", "__pycache__", "testing"):
+        if item.is_dir() and item.name in ("tests", "test", "testing"):
             try:
                 for f in item.rglob("*"):
                     if f.is_file():
@@ -48,8 +48,8 @@ def clean_unnecessary_files(directory: Path):
                 count_removed += 1
             except Exception:
                 pass
-        # Remove debug pdb and unneeded files
-        elif item.is_file() and item.suffix.lower() in (".pdb", ".pyc", ".pyo"):
+        # Remove debug pdb symbols (never delete .pyc bytecode needed by runtime!)
+        elif item.is_file() and item.suffix.lower() in (".pdb",):
             try:
                 size_removed += item.stat().st_size
                 item.unlink(missing_ok=True)
@@ -60,7 +60,7 @@ def clean_unnecessary_files(directory: Path):
     print(f"  [+] Cleaned {count_removed} unneeded test/cache items ({size_removed / (1024*1024):.1f} MB saved).")
 
 
-def build_sidecar():
+def build_sidecar(force_rebuild: bool = True):
     root_dir = Path(__file__).resolve().parent.parent
     os.chdir(root_dir)
 
@@ -72,56 +72,70 @@ def build_sidecar():
     print(f"  BUILDING OPTIMIZED SCIENTIFIC PYTHON SIDECAR FOR LIBRE SIGMA: {target_triple}")
     print("=" * 70)
 
-    # 1. Clean previous build artifacts
     dist_dir = root_dir / "dist"
     sidecar_dist = dist_dir / "libresigma-server"
+    built_exe = sidecar_dist / f"libresigma-server{ext}"
 
-    if sidecar_dist.exists():
-        shutil.rmtree(sidecar_dist, ignore_errors=True)
+    if force_rebuild or not built_exe.exists():
+        # 1. Clean previous build artifacts
+        if sidecar_dist.exists():
+            shutil.rmtree(sidecar_dist, ignore_errors=True)
 
-    # 2. Optimized PyInstaller invocation (DO NOT exclude unittest as scipy/statsmodels rely on it)
-    pyinstaller_cmd = [
-        sys.executable,
-        "-m",
-        "PyInstaller",
-        "--name", "libresigma-server",
-        "--onedir",
-        "--noconfirm",
-        "--clean",
-        # Explicit data inclusion for plugin architecture
-        f"--add-data=backend/app/plugins{sep}app/plugins",
-        f"--add-data=backend/app{sep}app",
-        # Heavy numerical and scientific engine collection
-        "--collect-all", "numpy",
-        "--collect-all", "scipy",
-        "--collect-all", "pandas",
-        "--collect-all", "statsmodels",
-        "--collect-all", "sklearn",
-        "--collect-all", "lifelines",
-        "--collect-all", "uvicorn",
-        "--collect-all", "fastapi",
-        "--collect-all", "pydantic",
-        "--collect-all", "app",
-        # Strictly exclude unused giant AI frameworks
-        "--exclude-module", "torch",
-        "--exclude-module", "torchvision",
-        "--exclude-module", "torchaudio",
-        "--exclude-module", "transformers",
-        "--exclude-module", "tokenizers",
-        "--exclude-module", "matplotlib",
-        "--exclude-module", "IPython",
-        "--exclude-module", "ipykernel",
-        "--exclude-module", "jupyter",
-        "--exclude-module", "tkinter",
-        # Entrypoint
-        "backend_entry.py",
-    ]
+        # 2. Optimized PyInstaller invocation
+        pyinstaller_cmd = [
+            sys.executable,
+            "-m",
+            "PyInstaller",
+            "--name", "libresigma-server",
+            "--onedir",
+            "--noconfirm",
+            "--clean",
+            # Explicit data inclusion for plugin architecture
+            f"--add-data=backend/app/plugins{sep}app/plugins",
+            f"--add-data=backend/app{sep}app",
+            # Numerical and scientific engine collection
+            "--collect-all", "numpy",
+            "--collect-all", "scipy",
+            "--collect-all", "pandas",
+            "--collect-all", "statsmodels",
+            "--collect-all", "sklearn",
+            "--collect-all", "lifelines",
+            "--collect-all", "uvicorn",
+            "--collect-all", "fastapi",
+            "--collect-all", "pydantic",
+            "--collect-all", "pydantic_core",
+            "--collect-all", "orjson",
+            "--collect-all", "pmdarima",
+            "--collect-all", "pyDOE3",
+            "--collect-all", "pyDOE2",
+            "--collect-all", "formulaic",
+            "--collect-all", "patsy",
+            "--collect-all", "autograd",
+            "--collect-all", "autograd_gamma",
+            "--collect-all", "anyio",
+            "--collect-all", "starlette",
+            "--collect-all", "app",
+            # Strictly exclude unused giant AI frameworks
+            "--exclude-module", "torch",
+            "--exclude-module", "torchvision",
+            "--exclude-module", "torchaudio",
+            "--exclude-module", "transformers",
+            "--exclude-module", "tokenizers",
+            "--exclude-module", "matplotlib",
+            "--exclude-module", "IPython",
+            "--exclude-module", "ipykernel",
+            "--exclude-module", "jupyter",
+            "--exclude-module", "tkinter",
+            "backend_entry.py",
+        ]
 
-    print(f"\nExecuting PyInstaller command:\n{' '.join(pyinstaller_cmd)}\n")
-    subprocess.run(pyinstaller_cmd, check=True)
+        print(f"\nExecuting PyInstaller command:\n{' '.join(pyinstaller_cmd)}\n")
+        subprocess.run(pyinstaller_cmd, check=True)
 
-    # 3. Clean test fixtures from third-party libraries
-    clean_unnecessary_files(sidecar_dist)
+        # 3. Clean test fixtures from third-party libraries
+        clean_unnecessary_files(sidecar_dist)
+    else:
+        print(f"\n[INFO] Reusing existing compiled sidecar bundle in {sidecar_dist}")
 
     # 4. Deploy to Tauri binaries directory
     tauri_bin_dir = root_dir / "frontend" / "src-tauri" / "binaries"
@@ -130,7 +144,6 @@ def build_sidecar():
     tauri_bin_dir.mkdir(parents=True, exist_ok=True)
 
     target_sidecar_exe = tauri_bin_dir / f"libresigma-server-{target_triple}{ext}"
-    built_exe = sidecar_dist / f"libresigma-server{ext}"
 
     if not built_exe.exists():
         raise FileNotFoundError(f"Expected compiled executable at {built_exe} was not found!")
@@ -153,4 +166,6 @@ def build_sidecar():
 
 
 if __name__ == "__main__":
-    build_sidecar()
+    reuse = "--reuse" in sys.argv or "--reuse-sidecar" in sys.argv
+    build_sidecar(force_rebuild=not reuse)
+

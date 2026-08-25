@@ -190,11 +190,28 @@ fn main() {
 
           // Stderr stream reader thread
           if let Some(err) = stderr {
+            let port_arc = Arc::clone(&port_clone);
+            let handle_clone = app_handle.clone();
+
             thread::spawn(move || {
               let reader = BufReader::new(err);
               for line_result in reader.lines() {
                 if let Ok(line) = line_result {
                   eprintln!("[Backend Engine Stderr] {}", line);
+
+                  // Intercept dynamic handshake JSON if sent on stderr
+                  if line.contains("\"status\"") && line.contains("\"port\"") {
+                    if let Ok(parsed) = serde_json::from_str::<Value>(&line) {
+                      if parsed["status"] == "ready" {
+                        if let Some(port_num) = parsed["port"].as_u64() {
+                          let port = port_num as u16;
+                          *port_arc.lock().unwrap() = Some(port);
+                          println!("[Tauri] Backend ready on dynamic port (from stderr): {}", port);
+                          let _ = handle_clone.emit_all("backend-ready", port);
+                        }
+                      }
+                    }
+                  }
                 }
               }
             });

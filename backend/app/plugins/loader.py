@@ -66,12 +66,32 @@ def _get_modules_directories() -> List[Path]:
         candidate_paths.append(exe_dir / "app" / "plugins" / "modules")
         candidate_paths.append(exe_dir / "backend" / "app" / "plugins" / "modules")
 
-    # Local development fallback
+    # Local development / module-relative fallback
     file_parent = Path(__file__).resolve().parent
     candidate_paths.append(file_parent / "modules")
 
-    # Filter only existing directories
-    valid_paths = [p for p in candidate_paths if p.is_dir()]
+    # Working directory fallbacks
+    cwd = Path.cwd()
+    candidate_paths.append(cwd / "backend" / "app" / "plugins" / "modules")
+    candidate_paths.append(cwd / "app" / "plugins" / "modules")
+
+    # sys.path search fallbacks
+    for p in sys.path:
+        if p:
+            candidate_paths.append(Path(p) / "app" / "plugins" / "modules")
+            candidate_paths.append(Path(p) / "backend" / "app" / "plugins" / "modules")
+
+    # Filter only existing directories without duplicates
+    seen = set()
+    valid_paths: List[Path] = []
+    for p in candidate_paths:
+        try:
+            resolved = p.resolve()
+            if resolved.is_dir() and str(resolved) not in seen:
+                seen.add(str(resolved))
+                valid_paths.append(resolved)
+        except Exception:
+            pass
     return valid_paths
 
 
@@ -84,6 +104,10 @@ def _load_module_from_file(file_path: Path, module_name: str) -> None:
         spec = importlib.util.spec_from_file_location(module_name, str(file_path))
         if spec and spec.loader:
             module = importlib.util.module_from_spec(spec)
+            # Set __package__ so relative imports work seamlessly
+            parts = module_name.split(".")
+            if len(parts) > 1:
+                module.__package__ = ".".join(parts[:-1])
             sys.modules[module_name] = module
             spec.loader.exec_module(module)
 
@@ -99,9 +123,9 @@ def _load_module_from_file(file_path: Path, module_name: str) -> None:
                         if instance.id not in registry._plugins:
                             registry.register(instance)
                     except Exception as err:
-                        logger.error(f"Error instantiating plugin {attr_name} in {file_path.name}: {err}")
+                        logger.error(f"Error instantiating plugin {attr_name} in {file_path.name}: {err}", exc_info=True)
     except Exception as e:
-        logger.error(f"Failed to load plugin module from {file_path}: {e}")
+        logger.error(f"Failed to load plugin module from {file_path} ({module_name}): {e}", exc_info=True)
 
 
 def discover_and_load_plugins(modules_package: str = "app.plugins.modules"):
@@ -114,6 +138,8 @@ def discover_and_load_plugins(modules_package: str = "app.plugins.modules"):
 
     # 1. Filesystem scan across freeze-safe directories
     plugin_dirs = _get_modules_directories()
+    logger.info(f"Scanning {len(plugin_dirs)} plugin directories: {[str(d) for d in plugin_dirs]}")
+
     for pdir in plugin_dirs:
         for py_file in pdir.rglob("*.py"):
             if py_file.name.startswith(("_", ".")) or py_file.name == "__init__.py":
@@ -160,3 +186,4 @@ def discover_and_load_plugins(modules_package: str = "app.plugins.modules"):
 
     loaded_total = len(registry.all())
     logger.info(f"Plugin discovery complete: {loaded_total} plugins registered (added {loaded_total - registered_count_before}).")
+

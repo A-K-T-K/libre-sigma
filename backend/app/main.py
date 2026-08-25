@@ -100,12 +100,21 @@ async def lifespan(app: FastAPI):
     discover_and_load_plugins("app.plugins.modules")
     logger.info(f"Loaded {len(registry.all())} statistical plugins.")
     
-    # Emit dynamic handshake JSON to stdout once server is fully initialized
+    # Emit dynamic handshake JSON to stdout and stderr once server is fully initialized
     port = getattr(app.state, "port", None)
     if port:
         handshake = {"status": "ready", "port": port}
-        sys.stdout.write(json.dumps(handshake) + "\n")
-        sys.stdout.flush()
+        msg = json.dumps(handshake) + "\n"
+        try:
+            sys.stdout.write(msg)
+            sys.stdout.flush()
+        except Exception:
+            pass
+        try:
+            sys.stderr.write(msg)
+            sys.stderr.flush()
+        except Exception:
+            pass
         
     yield
 
