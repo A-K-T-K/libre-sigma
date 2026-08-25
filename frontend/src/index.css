@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* LibRE Tab Desktop Custom Styles */
+@layer base {
+
+  body {
+    @apply antialiased text-[#242424] bg-[#f3f2f1];
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+    user-select: none;
+  }
+}
+
+/* Custom Scrollbar for Desktop feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8c6c4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8a8886;
+}
+
+/* Hierarchical Cascading Menu CSS (Direct Child Combinator >) */
+.fluent-cascade-item {
+  position: relative;
+}
+
+.fluent-cascade-item > .fluent-cascade-flyout {
+  display: none;
+}
+
+.fluent-cascade-item:hover > .fluent-cascade-flyout {
+  display: block;
+}
+
+.fluent-cascade-item:hover > .fluent-cascade-btn {
+  background-color: #008450 !important;
+  color: #ffffff !important;
+}
+
+.fluent-cascade-item:hover > .fluent-cascade-btn svg {
+  color: #ffffff !important;
+}
+
+/* Prevent all tooltips from intercepting pointer events and triggering hover flicker loops */
+.fui-Tooltip,
+.fui-Tooltip__content,
+[role="tooltip"] {
+  pointer-events: none !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.15s ease-out forwards;
+}
+
+/* ==========================================================================
+   ROBUST HIGH-RESOLUTION PRINT & PDF STYLESHEET
+   ========================================================================== */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 15mm 12mm 15mm 12mm;
+  }
+
+  /* Step 1: Hide absolutely everything from the document */
+  html, body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Hide the entire app shell */
+  body > #root {
+    display: none !important;
+  }
+
+  /* Step 2: The printable worksheet root is hoisted to a separate portal
+     inside <body> at print time via projectIo.ts window.print() approach.
+     We control it via class toggling — show it when printing. */
+  .printable-worksheet-root {
+    display: block !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-family: "Segoe UI", Arial, sans-serif !important;
+    font-size: 10pt !important;
+    z-index: 999999 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+
+  /* Step 3: Table styles for the worksheet data */
+  .printable-worksheet-root table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 8pt 0 !important;
+    font-size: 9pt !important;
+    table-layout: auto !important;
+  }
+
+  .printable-worksheet-root thead {
+    display: table-header-group !important;
+  }
+
+  .printable-worksheet-root tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .printable-worksheet-root th,
+  .printable-worksheet-root td {
+    border: 0.75pt solid #d1d5db !important;
+    padding: 3pt 5pt !important;
+    font-size: 8.5pt !important;
+    color: #1f2937 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .printable-worksheet-root th {
+    background-color: #f3f4f6 !important;
+    color: #111827 !important;
+    font-weight: 700 !important;
+    font-size: 8pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .printable-worksheet-root tbody tr:nth-child(even) td {
+    background-color: #f9fafb !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force Full Color Preservation across all browsers and WebView2 */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+
+

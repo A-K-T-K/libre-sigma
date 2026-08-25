@@ -1,0 +1,18 @@
+{
+  "name": "libre-tab-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LibRE Tab - Scientific Statistical Analysis & Reliability Engineering Native Desktop Platform",
+  "scripts": {
+    "start": "python start.py",
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "tauri": "node run_tauri.js",
+    "tauri:dev": "node run_tauri.js dev",
+    "tauri:build": "node run_tauri.js build",
+    "build:sidecar": "python scripts/build_sidecar.py",
+    "build:portable": "python scripts/build_portable.py",
+    "docs:serve": "mkdocs serve",
+    "docs:build": "mkdocs build"
+  }
+}

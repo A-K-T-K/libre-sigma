@@ -1,0 +1,3 @@
+"""
+OpenMinitab Nonparametric Statistical Suite.
+"""

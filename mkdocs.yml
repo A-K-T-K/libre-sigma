@@ -1,0 +1,91 @@
+site_name: LibRE Tab
+site_description: Open-Source Statistical Analysis & Reliability Engineering Desktop Platform
+site_author: LibRE Tab Contributors
+repo_url: https://github.com/your-username/libre-tab
+repo_name: libre-tab
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  language: en
+  palette:
+    # Light Mode: LibRE Tab Emerald Green
+    - scheme: default
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark Mode: Sleek Slate
+    - scheme: slate
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+extra_css:
+  - stylesheets/custom.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.mark
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - tables
+  - attr_list
+  - def_list
+  - toc:
+      permalink: true
+
+nav:
+  - Overview: index.md
+  - How to Use: how-to-use.md
+  - Architecture: architecture.md
+  - Statistical Capabilities:
+      - Basic Statistics & Inference: capabilities/basic-statistics.md
+      - Statistical Process Control (SPC): capabilities/spc-quality.md
+      - Design of Experiments (DOE): capabilities/doe.md
+      - Reliability & Survival: capabilities/reliability.md
+  - Plugin Development: plugin-guide.md
