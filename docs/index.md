@@ -12,33 +12,17 @@ LibRE Tab is designed to provide an open, modern alternative to commercial stati
 
 ## Key Capabilities
 
-<div class="grid cards" markdown>
-
--   :material-chart-bell-curve-cumulative: **Comprehensive Statistical Engine**
-
-    ---
-
+!!! success "Comprehensive Statistical Engine"
     Over 120 built-in analytical plugins powered by **NumPy**, **SciPy**, **Statsmodels**, **Scikit-Learn**, and **Lifelines**. Includes ANOVA, GLM, Nonparametric tests, and Time Series models.
 
--   :material-chart-timeline-variant: **Six Sigma & Quality Engineering**
-
-    ---
-
+!!! info "Six Sigma & Quality Engineering"
     Full support for Variables and Attributes Control Charts ($\bar{X}\text{-}R$, $I\text{-}MR$, $p$, $u$), automated Nelson rule detection, Process Capability ($C_p, C_{pk}, P_p, P_{pk}$), and Gage R&R studies.
 
--   :material-flask-outline: **Design of Experiments (DOE)**
-
-    ---
-
+!!! example "Design of Experiments (DOE)"
     Full and fractional $2^k$ factorial designs, Central Composite Designs (CCD), Box-Behnken response surface models, Simplex mixture designs, and Taguchi orthogonal arrays ($L_4\text{--}L_{27}$).
 
--   :material-shield-check: **100% Offline & Local-First**
-
-    ---
-
+!!! note "100% Offline & Local-First"
     Zero cloud transmission and zero telemetry. All computations, datasets, and visualizations are processed entirely on your local machine.
-
-</div>
 
 ---
 
