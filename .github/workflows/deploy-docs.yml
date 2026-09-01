@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -36,6 +36,14 @@ jobs:
       - name: Build VitePress Documentation
         run: npm run docs:build
 
+      # Deploy to gh-pages branch (supports repositories configured for branch deployment)
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/.vitepress/dist
+
+      # Deploy directly to GitHub Pages via official Action
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
