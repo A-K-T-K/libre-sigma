@@ -1,12 +1,12 @@
 # How to Use LibRE Sigma
 
-This guide covers the core workflow of LibRE Sigma: managing multi-sheet workbooks, importing data, running statistical analyses, interacting with output charts, and generating reports.
+This user guide walks you through the core workflow of **LibRE Sigma**: managing multi-sheet workbooks, importing data, running statistical analyses, inspecting interactive charts, and exporting results.
 
 ---
 
 ## 1. Workspace Layout
 
-The LibRE Sigma interface is organized into five primary regions:
+The LibRE Sigma user interface is structured into five primary functional regions:
 
 ```
 +-------------------------------------------------------------------------+
@@ -24,7 +24,7 @@ The LibRE Sigma interface is organized into five primary regions:
 +-------------------------------------------------------------------------+
 ```
 
-1. **Top Menu & Ribbon**: Quick access to statistical procedures, DOE modals, file operations, and data manipulation tools.
+1. **Top Menu & Ribbon**: Quick access to statistical procedures, DOE creation wizards, file management, and data manipulation tools.
 2. **Left Navigator**: Tree explorer displaying active sheets, DOE matrices, and history of statistical output sessions.
 3. **Session Output Pane**: Dedicated transcript area displaying Markdown text summaries, structured statistical tables, $p$-values, test statistics, and interactive Plotly figures.
 4. **Formula Bar & Worksheet Grid**: High-performance dual-header spreadsheet with dynamic $C_1, C_2, \dots, C_n$ column indices, named variables, data types (Numeric, Text, Date), and formula evaluation.
@@ -34,23 +34,30 @@ The LibRE Sigma interface is organized into five primary regions:
 
 ## 2. Importing & Managing Data
 
-=== "Open / Import Files"
-    LibRE Sigma supports native project files, Excel spreadsheets, and delimited text:
+### Open / Import Files
 
-    - **Native Project (`.lsg`, `.ltb`)**: `Ctrl+O` or `File > Open Project / Data`. Restores complete project state, multiple sheets, column metadata, and session history.
-    - **Excel (`.xlsx`, `.xls`)**: `Ctrl+I` or `File > Import Excel Workbook`. Automatically imports all sheets in the workbook.
-    - **CSV / TSV / TXT**: `File > Import CSV / Text Data` or drag and drop any `.csv` file onto the application window.
+LibRE Sigma supports native project files, Excel spreadsheets, and delimited text:
 
-=== "Manual Data Entry & Formulas"
-    - **Dual-Header Editing**: Double-click any column header to rename the variable. Type indicator labels (`-T` for Text, `-D` for Date) update automatically based on entered data.
-    - **Formula Execution**: Select a target column, click the **Formula Bar**, and enter expressions like `C1 * 1.5`, `LN(C2)`, `STANDARDIZE(C3)`, or `C2 - C1`. Formulas evaluate automatically across all rows.
-    - **Patterned Data Generation**: Navigate to `Data > Create Patterned Data` to populate numeric sequences (e.g. `1 to 50 by 2`) or categorical factor levels (`A, B, C` repeated $N$ times).
+- **Native Project (`.lsg`, `.ltb`)**: `Ctrl+O` or `File > Open Project / Data`. Restores complete project state, multiple sheets, column metadata, and session history.
+- **Excel (`.xlsx`, `.xls`)**: `Ctrl+I` or `File > Import Excel Workbook`. Automatically imports all sheets in the workbook.
+- **CSV / TSV / TXT**: `File > Import CSV / Text Data` or drag and drop any `.csv` file onto the application window.
 
-=== "Data Manipulation Suite"
-    - **Sort Columns**: `Data > Sort Columns` allows multi-key sorting with ascending/descending criteria.
-    - **Stack / Unstack**: `Data > Stack Columns` reshapes wide columns into tall subscripted pairs; `Data > Unstack Columns` reverses the transformation.
-    - **Recode**: `Data > Recode Data` maps categorical text or bins numeric continuous ranges into new discrete categories.
-    - **Subset Worksheet**: `Data > Subset Worksheet` filters rows based on conditional expressions (e.g. `Batch == "A" & Temperature > 80`) into a new sheet.
+::: tip Sample Datasets Included
+You can quickly explore the application by navigating to **Help > Open Sample Dataset**, which provides standard benchmark datasets for Gage R&R, Weibull life testing, and Taguchi optimization.
+:::
+
+### Manual Data Entry & Formulas
+
+- **Dual-Header Editing**: Double-click any column header to rename the variable. Type indicator labels (`-T` for Text, `-D` for Date) update automatically based on entered data.
+- **Formula Execution**: Select a target column, click the **Formula Bar**, and enter expressions like `C1 * 1.5`, `LN(C2)`, `STANDARDIZE(C3)`, or `C2 - C1`. Formulas evaluate automatically across all rows.
+- **Patterned Data Generation**: Navigate to `Data > Create Patterned Data` to populate numeric sequences (e.g. `1 to 50 by 2`) or categorical factor levels (`A, B, C` repeated $N$ times).
+
+### Data Manipulation Tools
+
+- **Sort Columns**: `Data > Sort Columns` allows multi-key sorting with ascending/descending criteria.
+- **Stack / Unstack**: `Data > Stack Columns` reshapes wide columns into tall subscripted pairs; `Data > Unstack Columns` reverses the transformation.
+- **Recode**: `Data > Recode Data` maps categorical text or bins numeric continuous ranges into new discrete categories.
+- **Subset Worksheet**: `Data > Subset Worksheet` filters rows based on conditional expressions (e.g. `Batch == "A" & Temperature > 80`) into a new sheet.
 
 ---
 
@@ -58,78 +65,28 @@ The LibRE Sigma interface is organized into five primary regions:
 
 To perform any statistical test or quality calculation:
 
-```mermaid
-graph LR
-    A[Select Statistical Tool] --> B[Modal Dialog Opens]
-    B --> C[Select Columns from Variable List]
-    C --> D[Configure Options & Alpha]
-    D --> E[Click OK / Compute]
-    E --> F[Session Transcript & Chart Rendered]
-```
-
-1. **Select the Procedure**: Click from the **Stat**, **Graph**, or **DOE** top menus, or press <kbd>Ctrl</kbd> + <kbd>K</kbd> to open the **Universal Command Palette** and search by name.
-2. **Assign Columns**:
-   - In the modal dialog, select a parameter field (e.g. *Response Variable* or *Sample Column*).
-   - Double-click a column in the left list or click the **Select** arrow button.
-3. **Configure Analytical Parameters**: Set the confidence level (e.g. `0.95`), hypothesis test values, alternative hypothesis direction ($\neq, <, >$), or distribution type.
-4. **Compute**: Click **OK**. The Python engine computes the analytical model, and the results appear in the **Session Output Pane**.
+1. **Select Procedure**: Click the desired menu item (e.g., `Stat > Basic Statistics > 2-Sample t-Test` or `Stat > Control Charts > Variables Charts for Subgroups > Xbar-R`).
+2. **Configure Parameters Modal**:
+   - Double-click columns in the left column picker list to insert them into active variable fields.
+   - Adjust options such as **Confidence Level**, **Hypothesized Difference**, or **Alternative Hypothesis**.
+3. **Execute**: Click **OK** (`Enter`) to dispatch computation to the local Python engine.
+4. **View Results**:
+   - The **Session Output** pane immediately displays formatted statistical tables, $p$-values, confidence intervals, and interactive Plotly figures.
+   - Click and drag on any chart to zoom, double-click to reset view, and hover over data points to inspect Nelson rule alarms or subgroup statistics.
 
 ---
 
-## 4. Interactive Charts & Plotly Visualizations
+## 4. Keyboard Shortcuts
 
-All graphs generated by LibRE Sigma (Histograms, Capability Sixpack, Control Charts, Residual Plots, Surface Plots) are rendered with **Plotly.js**:
-
-- **Zoom**: Click and drag a bounding box on any chart region.
-- **Pan**: Click and drag while holding <kbd>Shift</kbd>.
-- **Hover Tooltips**: Move your cursor over points, violation marks, or density curves to view exact coordinates, observation numbers, and test failure rules.
-- **Export Chart**: Click the camera icon in the upper-right corner of any plot to export high-resolution PNG or SVG vector graphics.
-
----
-
-## 5. Design of Experiments (DOE)
-
-LibRE Sigma includes dedicated experiment design generators:
-
-=== "Taguchi Methods"
-    1. Navigate to `DOE > Taguchi > Create Taguchi Design`.
-    2. Choose number of factors (2 to 31) and levels (2-Level or 3-Level).
-    3. Select an orthogonal array ($L_4, L_8, L_9, L_{12}, L_{16}, L_{18}, L_{27}$).
-    4. Click **OK** — a randomized worksheet is generated with run orders and experimental factor levels.
-    5. After recording responses, run `DOE > Taguchi > Analyze Taguchi Design` to generate S/N ratio response tables, delta rankings, and main effects plots.
-
-=== "Factorial & Response Surface (RSM)"
-    1. Navigate to `DOE > Factorial > Create Factorial Design` or `DOE > Response Surface > Create RSM Design`.
-    2. Select Full Factorial ($2^k$), Fractional Factorial ($2^{k-p}$), Central Composite (CCD), or Box-Behnken designs.
-    3. Specify factor names, low/high continuous levels, and replicates.
-    4. Analyze the design with `DOE > Analyze Factorial Design` to generate ANOVA tables, Pareto charts of standardized effects, and 3D surface/contour plots.
-
----
-
-## 6. Saving, Printing & Exporting
-
-- **Save Project (`Ctrl+S`)**: Saves all open worksheets, column formulas, metadata, and generated session results into a native `.lsg` / `.ltb` file.
-- **Unsaved Changes Guard**: If you have unsaved changes, LibRE Sigma prompts you with **Save / Don't Save / Cancel** before creating a new project, opening another file, or exiting.
-- **Export Excel (`Ctrl+E`)**: Exports all worksheets to a multi-sheet Microsoft Excel (`.xlsx`) workbook.
-- **Print / PDF Report (`Ctrl+P`)**: Generates a high-resolution print report of the active worksheet and analysis session.
-
----
-
-## 7. Keyboard Shortcuts Reference
-
-| Shortcut | Action |
-| :--- | :--- |
-| <kbd>Ctrl</kbd> + <kbd>K</kbd> | Open Universal Command Palette |
-| <kbd>Ctrl</kbd> + <kbd>N</kbd> | New Project (Guarded) |
-| <kbd>Ctrl</kbd> + <kbd>O</kbd> | Open Project or Data File (`.ltb`, `.xlsx`, `.csv`) |
-| <kbd>Ctrl</kbd> + <kbd>S</kbd> | Save Project (`.ltb`) |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> | Save Project As (`.ltb`) |
-| <kbd>Ctrl</kbd> + <kbd>I</kbd> | Import Excel Workbook (`.xlsx`) |
-| <kbd>Ctrl</kbd> + <kbd>E</kbd> | Export Excel Workbook (`.xlsx`) |
-| <kbd>Ctrl</kbd> + <kbd>P</kbd> | Print / Export PDF Worksheet Report |
-| <kbd>Ctrl</kbd> + <kbd>Z</kbd> | Undo last worksheet edit |
-| <kbd>Ctrl</kbd> + <kbd>Y</kbd> / <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> | Redo worksheet edit |
-| <kbd>Ctrl</kbd> + <kbd>C</kbd> | Copy selected grid cells |
-| <kbd>Ctrl</kbd> + <kbd>X</kbd> | Cut selected grid cells |
-| <kbd>Ctrl</kbd> + <kbd>V</kbd> | Paste cells from clipboard |
-| <kbd>Delete</kbd> | Clear selected cell values |
+| Shortcut | Action | Description |
+| :--- | :--- | :--- |
+| `Ctrl+N` | New Project | Clears current session and starts fresh workbook |
+| `Ctrl+O` | Open Project | Opens `.lsg` project or dataset |
+| `Ctrl+S` | Save Project | Saves project with all sheets and output history |
+| `Ctrl+Shift+S` | Save Project As | Saves project under a new filename |
+| `Ctrl+I` | Import Excel | Imports `.xlsx` multi-sheet workbook |
+| `Ctrl+Z` | Undo | Reverts last grid or worksheet operation |
+| `Ctrl+Y` / `Ctrl+Shift+Z` | Redo | Re-applies undone operation |
+| `Ctrl+C` | Copy | Copies selected cells to clipboard |
+| `Ctrl+V` | Paste | Pastes clipboard content into grid |
+| `F1` | Documentation | Opens the online/offline documentation site |

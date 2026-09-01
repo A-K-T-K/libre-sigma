@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -24,32 +24,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configure Python
-        uses: actions/setup-python@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          node-version: 20
+          cache: 'npm'
 
-      - name: Install MkDocs Material
-        run: |
-          python -m pip install --upgrade pip
-          pip install mkdocs-material
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Build MkDocs Site
-        run: |
-          mkdocs build
+      - name: Build VitePress Documentation
+        run: npm run docs:build
 
-      - name: Deploy to gh-pages branch (Legacy support)
-        run: |
-          mkdocs gh-deploy --force
-
-      - name: Setup GitHub Pages Artifacts
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './site'
+          path: './docs/.vitepress/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment

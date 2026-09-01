@@ -11,7 +11,7 @@ Computes central tendency, dispersion, and shape parameters for one or more cont
 - **Central Tendency**: Mean, Trimmed Mean (5%), Median, Mode.
 - **Dispersion**: Standard Deviation ($s$), Variance ($s^2$), Standard Error of Mean ($\text{SE}_{\bar{x}}$), Interquartile Range ($\text{IQR}$), Range ($\text{Max} - \text{Min}$).
 - **Shape & Distribution**: Skewness, Kurtosis, Coefficient of Variation ($\text{CV}$).
-- **Graphical Displays**: Histogram with normal curve overlay, Boxplot with outlier detection (1.5 × IQR rule), and Individual Value Plot.
+- **Graphical Displays**: Histogram with normal curve overlay, Boxplot with outlier detection ($1.5 \times \text{IQR}$ rule), and Individual Value Plot.
 
 ---
 
@@ -28,11 +28,11 @@ $$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}, \quad \text{df} = n - 1$$
 ### 2-Sample Independent $t$-Test
 Compares the means of two independent groups ($\mu_1 - \mu_2$):
 
-=== "Equal Variances Assumed (Pooled)"
-    $$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}, \quad s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$$
+#### Equal Variances Assumed (Pooled)
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}, \quad s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$$
 
-=== "Unequal Variances (Welch's Satterthwaite Correction)"
-    $$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}, \quad \text{df} = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1} + \frac{(s_2^2/n_2)^2}{n_2-1}}$$
+#### Unequal Variances (Welch's Satterthwaite Correction)
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}, \quad \text{df} = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{(s_1^2/n_1)^2}{n_1-1} + \frac{(s_2^2/n_2)^2}{n_2-1}}$$
 
 ### Paired $t$-Test
 Evaluates mean differences for matched pairs or repeated measures:

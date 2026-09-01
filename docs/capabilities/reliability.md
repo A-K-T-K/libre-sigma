@@ -9,7 +9,7 @@ LibRE Sigma provides statistical tools for analyzing failure time data, estimati
 Fits failure time data using Maximum Likelihood Estimation (MLE):
 
 ### Weibull Distribution (2-Parameter & 3-Parameter)
-The standard distribution for modeling mechanical and electronic component wear-out:
+The standard distribution for modeling mechanical, electronic, and material wear-out:
 
 $$f(t) = \frac{\beta}{\eta} \left(\frac{t - \gamma}{\eta}\right)^{\beta - 1} \exp\left(-\left(\frac{t - \gamma}{\eta}\right)^\beta\right)$$
 

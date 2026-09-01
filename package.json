@@ -12,7 +12,13 @@
     "tauri:build": "node run_tauri.js build",
     "build:sidecar": "python scripts/build_sidecar.py",
     "build:portable": "python scripts/build_portable.py",
-    "docs:serve": "mkdocs serve",
-    "docs:build": "mkdocs build"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "docs:serve": "vitepress dev docs"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress": "^1.5.0"
   }
 }

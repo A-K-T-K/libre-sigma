@@ -1,0 +1,84 @@
+/**
+ * LibRE Sigma Custom VitePress Theme Styles
+ * Brand Primary: Emerald / Forest Green (#008450)
+ */
+
+:root {
+  --vp-c-brand-1: #008450;
+  --vp-c-brand-2: #00a86b;
+  --vp-c-brand-3: #00683f;
+  --vp-c-brand-soft: rgba(0, 132, 80, 0.12);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #008450 30%, #00d084);
+
+  --vp-home-hero-image-filter: drop-shadow(0 20px 40px rgba(0, 132, 80, 0.15));
+}
+
+.dark {
+  --vp-c-brand-1: #00d084;
+  --vp-c-brand-2: #00b370;
+  --vp-c-brand-3: #008450;
+  --vp-c-brand-soft: rgba(0, 208, 132, 0.15);
+
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #00e692 30%, #4ae5ab);
+  --vp-home-hero-image-filter: drop-shadow(0 25px 50px rgba(0, 208, 132, 0.22));
+}
+
+/* Hero Main Window Image Styling */
+.hero-image-container {
+  margin: 3rem auto 2rem;
+  max-width: 1100px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 132, 80, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-image-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 70px -12px rgba(0, 132, 80, 0.25);
+}
+
+.hero-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Feature grid enhancements */
+.VPFeature {
+  border: 1px solid var(--vp-c-bg-soft) !important;
+  transition: all 0.25s ease !important;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  transform: translateY(-2px);
+}
+
+/* Custom badges */
+.badge-free {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Mathematical formulas readability */
+.mjx-chtml {
+  font-size: 108% !important;
+}
+
+/* Table styling */
+table {
+  display: table;
+  width: 100%;
+}

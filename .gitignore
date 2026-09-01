@@ -9,6 +9,10 @@ site/
 dist/
 dist-*/
 build/
+.vitepress/dist/
+.vitepress/cache/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
 binaries/
 **/binaries/
 LibRE_Tab_Portable*/

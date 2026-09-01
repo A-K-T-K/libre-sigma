@@ -14,14 +14,14 @@ Taguchi experimental designs use orthogonal arrays to optimize process performan
 
 ### Signal-to-Noise (S/N) Ratio Metrics
 
-=== "Larger is Better (e.g. Strength, Efficiency)"
-    $$\eta = -10 \log_{10} \left(\frac{1}{n} \sum_{i=1}^n \frac{1}{y_i^2}\right)$$
+#### Larger is Better (e.g. Strength, Tensile, Efficiency)
+$$\eta = -10 \log_{10} \left(\frac{1}{n} \sum_{i=1}^n \frac{1}{y_i^2}\right)$$
 
-=== "Smaller is Better (e.g. Wear, Defects, Noise)"
-    $$\eta = -10 \log_{10} \left(\frac{1}{n} \sum_{i=1}^n y_i^2\right)$$
+#### Smaller is Better (e.g. Wear, Defects, Noise)
+$$\eta = -10 \log_{10} \left(\frac{1}{n} \sum_{i=1}^n y_i^2\right)$$
 
-=== "Nominal is Best (e.g. Dimension, Target Voltage)"
-    $$\eta = 10 \log_{10} \left(\frac{\bar{y}^2}{s^2}\right)$$
+#### Nominal is Best (e.g. Dimension, Target Voltage)
+$$\eta = 10 \log_{10} \left(\frac{\bar{y}^2}{s^2}\right)$$
 
 ### Output Deliverables
 - S/N Ratio Response Table with delta ranking of factor significance.

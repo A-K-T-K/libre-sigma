@@ -9,13 +9,17 @@
 </p>
 
 <p align="center">
-  <a href="https://a-k-t-k.github.io/libre-sigma/"><img src="https://img.shields.io/badge/Docs-Live%20Guide-008450?style=for-the-badge&logo=material-for-mkdocs&logoColor=white" alt="Documentation"></a>
+  <a href="https://a-k-t-k.github.io/libre-sigma/"><img src="https://img.shields.io/badge/Docs-VitePress%20Guide-008450?style=for-the-badge&logo=vite&logoColor=white" alt="Documentation"></a>
   <a href="https://doi.org/10.5281/zenodo.22093338"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22093338-0078d4?style=for-the-badge&logo=doi&logoColor=white" alt="DOI: 10.5281/zenodo.22093338"></a>
   <a href="#getting-started"><img src="https://img.shields.io/badge/Status-v1.0.0-008450?style=for-the-badge" alt="Release Status"></a>
   <a href="#architecture-overview"><img src="https://img.shields.io/badge/Platform-Tauri%20%7C%20Rust%20%7C%20React-0078d4?style=for-the-badge" alt="Platform"></a>
   <a href="#architecture-overview"><img src="https://img.shields.io/badge/Engine-Python%20%7C%20SciPy%20%7C%20Statsmodels-3776AB?style=for-the-badge" alt="Engine"></a>
   <a href="#license"><img src="https://img.shields.io/badge/License-MIT-008450?style=for-the-badge" alt="License"></a>
   <a href="#architecture-overview"><img src="https://img.shields.io/badge/Privacy-100%25%20Offline%20%26%20Local-8E24AA?style=for-the-badge" alt="Local First"></a>
+</p>
+
+<p align="center">
+  <img src="assets/main_window.png" alt="LibRE Sigma Desktop Interface - SPC Control Charts and Worksheet Grid" width="90%" />
 </p>
 
 <p align="center">

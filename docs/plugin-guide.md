@@ -1,15 +1,15 @@
 # Plugin Developer Guide
 
-LibRE Sigma features a schema-driven plugin architecture. Adding a new statistical test or quality tool requires only creating a Python module in `backend/app/plugins/modules/`.
+LibRE Sigma features a schema-driven plugin architecture. Adding a new statistical test, quality tool, or DOE routine requires only creating a single Python module in `backend/app/plugins/modules/`.
 
-The application handles dynamic parameter schema generation, interactive modal dialog rendering, column selection pickers, top-menu mounting, session transcript formatting, and Plotly chart generation automatically.
+The application automatically handles dynamic parameter schema generation, interactive modal dialog rendering, column pickers, top-menu mounting, session transcript formatting, and Plotly chart generation.
 
 ---
 
 ## 1. Anatomy of a Plugin
 
-Every plugin consists of two classes:
-1. **Parameter Schema (`BaseModel`)**: Defines the user-configurable inputs, data types, validation rules, and UI widget types.
+Every plugin consists of two key components:
+1. **Parameter Schema (`BaseModel`)**: Defines user-configurable inputs, data types, validation rules, and UI widget types.
 2. **Plugin Class (`AnalysisPlugin`)**: Defines metadata (ID, display name, menu path) and the computational logic in `execute()`.
 
 ```python
@@ -76,7 +76,7 @@ You can customize how input parameters are rendered in the dialog modal using `j
 
 ---
 
-## 3. Returning Charts & Output Graphics
+## 3. Returning Interactive Charts
 
 To render interactive Plotly figures in the session output, return a Plotly figure dictionary in `AnalysisResult`:
 

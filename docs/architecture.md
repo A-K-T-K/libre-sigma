@@ -1,25 +1,25 @@
 # System Architecture
 
-LibRE Sigma is designed as a hybrid desktop platform combining a native Rust shell, a React user interface, and an asynchronous Python scientific engine.
+LibRE Sigma is designed as a high-performance desktop platform combining a native **Rust (Tauri)** host shell, a virtualized **React 18** user interface, and an asynchronous **Python** scientific engine.
 
 ```mermaid
 graph TD
     subgraph Desktop Layer [Tauri Desktop Host]
-        RustHost[Tauri Rust Engine]
-        WinManager[Window & Event Manager]
+        RustHost[Tauri Rust Host Shell]
+        WinManager[Native Window & Lifecycle Manager]
     end
 
     subgraph Frontend Layer [Webview UI Engine]
         UI[React 18 & TypeScript]
-        Grid[Glide Data Grid]
-        Store[Zustand Stores]
-        Charts[Plotly.js Visualizer]
+        Grid[Glide Data Grid Canvas 60 FPS]
+        Store[Zustand Multi-Sheet Stores]
+        Charts[Plotly.js Interactive Visualizer]
     end
 
     subgraph Analytical Layer [Python Scientific Engine]
-        FastAPI[FastAPI Server]
+        FastAPI[FastAPI Ephemeral Server]
         Plugins[Plugin Registry: 120+ Modules]
-        SciPy[NumPy / SciPy / Statsmodels]
+        SciPy[NumPy / SciPy / Statsmodels / Lifelines]
         Watchdog[Heartbeat Watchdog Daemon]
     end
 
@@ -43,13 +43,13 @@ The desktop binary is compiled using **Tauri v1** (Rust):
   - Automatically locates and launches the Python engine process on startup.
   - In development mode, executes `python backend_entry.py --port 0`.
   - In production packaged mode, launches the compiled binary (`libresigma-server.exe` / `libretab-server.exe`).
-- **Clean Exit Termination**: Catches `WindowEvent::Destroyed` and sends an immediate termination signal (`child.kill()`) to the sidecar process to prevent background leaks.
+- **Clean Exit Termination**: Catches `WindowEvent::Destroyed` and sends an immediate termination signal (`child.kill()`) to the sidecar process to prevent orphaned background processes.
 
 ---
 
 ## 2. Dynamic Ephemeral Port Handshake
 
-To prevent port collision issues with other local services or instances:
+To prevent port collision issues with other local services or existing instances:
 
 1. The Python engine binds to port `0`, prompting the OS kernel to assign an available ephemeral port.
 2. The engine outputs a JSON handshake line to standard output:
